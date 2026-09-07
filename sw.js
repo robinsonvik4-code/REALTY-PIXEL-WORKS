@@ -1,4 +1,4 @@
-const CACHE = "realtypixelworks-interactions-v8";
+const CACHE = "realtypixelworks-portfolio-vs-v9";
 const CORE = ["./","index.html","services.html","portfolio.html","contact.html","thank-you.html","assets/css/style.css","assets/js/script.js"];
 self.addEventListener("install", (event) => { event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)).catch(() => {})); self.skipWaiting(); });
 self.addEventListener("activate", (event) => { event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))).then(() => self.clients.claim())); });
