@@ -3,7 +3,8 @@ import re
 
 root = Path('dist')
 
-# Virtual Staging: furnished/staged image on LEFT, empty room on RIGHT.
+# Keep the current Virtual Staging image order exactly as-is:
+# furnished/staged image on LEFT, empty room on RIGHT.
 pairs = [
     ('vs-living-before-1.jpg', 'vs-living-after-1.jpg'),
     ('vs-bedroom-before.jpg', 'vs-bedroom-after.jpg'),
@@ -14,16 +15,17 @@ for name in ('services.html', 'portfolio.html'):
     path = root / name
     text = path.read_text(encoding='utf-8')
 
+    # Preserve the previously requested image direction.
     for before, after in pairs:
         token = f'__TMP_{before}__'
         text = text.replace(before, token)
         text = text.replace(after, before)
         text = text.replace(token, after)
 
-    # Furnished/staged image is on the LEFT, so it is AFTER.
-    # Empty room is on the RIGHT, so it is BEFORE.
-    text = text.replace('<span>BEFORE</span><span>AFTER</span>', '<span>AFTER</span><span>BEFORE</span>')
-    text = text.replace('<span>STAGED</span><span>EMPTY</span>', '<span>AFTER</span><span>BEFORE</span>')
+    # TEXT ONLY: left badge must say BEFORE, right badge must say AFTER.
+    text = text.replace('<span>AFTER</span><span>BEFORE</span>', '<span>BEFORE</span><span>AFTER</span>')
+    text = text.replace('<span>STAGED</span><span>EMPTY</span>', '<span>BEFORE</span><span>AFTER</span>')
+    text = text.replace('<span>EMPTY</span><span>STAGED</span>', '<span>BEFORE</span><span>AFTER</span>')
     path.write_text(text, encoding='utf-8')
 
 # Make every regular image inside <main> openable. Slider images still use their full-screen button.
@@ -38,7 +40,7 @@ js = re.sub(
 )
 js_path.write_text(js, encoding='utf-8')
 
-# Reinforce slider direction visually.
+# Reinforce slider direction visually without changing the requested image order.
 css_path = root / 'assets/css/style.css'
 css = css_path.read_text(encoding='utf-8')
 css += r'''\n/* Latest Virtual Staging direction */
@@ -54,11 +56,11 @@ main img.zoomable-img{cursor:zoom-in}
 '''
 css_path.write_text(css, encoding='utf-8')
 
-# Force browsers to pick up this deployment instead of an older cached JS/CSS build.
+# Force browsers to pick up this deployment instead of an older cached build.
 sw_path = root / 'sw.js'
 if sw_path.exists():
     sw = sw_path.read_text(encoding='utf-8')
-    sw = re.sub(r'const CACHE\s*=\s*["\'][^"\']+["\'];', 'const CACHE = "realtypixelworks-vs-labels-v14";', sw)
+    sw = re.sub(r'const CACHE\s*=\s*["\'][^"\']+["\'];', 'const CACHE = "realtypixelworks-vs-text-v15";', sw)
     sw_path.write_text(sw, encoding='utf-8')
 
-print('Applied RealtyPixelWorks Virtual Staging direction + Before/After label fixes.')
+print('Applied text-only Virtual Staging labels: BEFORE left, AFTER right.')
