@@ -20,5 +20,17 @@ body.modal-open{overflow:hidden}
 .lead-form-status.success{color:#6ee7a8}
 .lead-form-status.error{color:#ff8b8b}
 #leadSubmitBtn:disabled{opacity:.78;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* Portfolio Virtual Staging before/after sliders */
+.staging-ba-item{position:relative;overflow:hidden}
+.staging-ba-item .portfolio-ba{border:0;border-radius:0;aspect-ratio:4/3;width:100%}
+.staging-ba-item .portfolio-ba img{width:100%;height:100%;object-fit:cover}
+.staging-ba-item figcaption{min-height:52px}
+.staging-ba-item .ba-open{right:12px;bottom:12px}
+.ba .after{clip-path:inset(0 0 0 50%)}
+main img.zoomable-img{cursor:zoom-in;transition:transform .2s ease,filter .2s ease}
+main img.zoomable-img:hover{filter:brightness(1.04)}
+
 @media(max-width:760px){.lead-submit-btn{min-height:60px;border-radius:16px}.lead-submit-main{font-size:15px}}
+@media(max-width:700px){.staging-ba-item .portfolio-ba{aspect-ratio:16/11}}
 @media(max-width:640px){.compare-open{right:10px;bottom:48px;width:38px;height:38px}.ba-modal-holder .interactive-compare,.ba-modal-holder .interactive-compare img{min-height:min(54vh,430px)}}
