@@ -1,0 +1,24 @@
+
+/* Latest RealtyPixelWorks interaction + lead-form fixes */
+body.modal-open{overflow:hidden}
+.ba,.interactive-compare{touch-action:pan-y}
+.range,.compare-range{touch-action:none;cursor:ew-resize}
+.zoomable-img{cursor:zoom-in}
+.compare-open{position:absolute;right:14px;bottom:52px;z-index:20;width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.68);color:#fff;font-size:19px;font-weight:800;cursor:pointer;display:grid;place-items:center}
+.compare-open:hover,.ba-open:hover{background:rgba(0,0,0,.88)}
+.ba-modal-holder .interactive-compare{width:100%;min-height:min(68vh,720px);aspect-ratio:auto}
+.ba-modal-holder .interactive-compare img{min-height:min(68vh,720px);object-fit:contain;background:#090b10}
+.field-note{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.6}
+.field-note strong{color:#dfe8ff}
+.lead-submit-btn{width:100%;justify-content:center;align-items:center;flex-direction:column;gap:2px;min-height:64px;border:1px solid rgba(255,255,255,.08);border-radius:18px;color:#fff;background:linear-gradient(135deg,#4d6bff 0%,#22d7ff 55%,#6f54ff 100%);box-shadow:0 16px 38px rgba(34,215,255,.18),0 10px 24px rgba(77,107,255,.20);font-weight:800;transition:transform .2s ease,box-shadow .25s ease,filter .25s ease}
+.lead-submit-btn:hover{transform:translateY(-2px);box-shadow:0 20px 40px rgba(34,215,255,.24),0 12px 26px rgba(77,107,255,.24);filter:saturate(1.08)}
+.lead-submit-btn:active{transform:translateY(0)}
+.lead-submit-main{font-size:16px;letter-spacing:.2px}
+.lead-submit-sub{font-size:11px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;opacity:.92}
+.submit-note{margin-top:10px;text-align:center;color:#8ea0bd;font-size:12px;line-height:1.5}
+.lead-form-status{margin-top:12px;min-height:20px;font-size:13px;color:var(--muted)}
+.lead-form-status.success{color:#6ee7a8}
+.lead-form-status.error{color:#ff8b8b}
+#leadSubmitBtn:disabled{opacity:.78;cursor:not-allowed;transform:none;box-shadow:none}
+@media(max-width:760px){.lead-submit-btn{min-height:60px;border-radius:16px}.lead-submit-main{font-size:15px}}
+@media(max-width:640px){.compare-open{right:10px;bottom:48px;width:38px;height:38px}.ba-modal-holder .interactive-compare,.ba-modal-holder .interactive-compare img{min-height:min(54vh,430px)}}
