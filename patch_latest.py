@@ -20,8 +20,10 @@ for name in ('services.html', 'portfolio.html'):
         text = text.replace(after, before)
         text = text.replace(token, after)
 
-    # Explicit labels avoid Before/After confusion when staged is intentionally on the left.
-    text = text.replace('<span>BEFORE</span><span>AFTER</span>', '<span>STAGED</span><span>EMPTY</span>')
+    # Furnished/staged image is on the LEFT, so it is AFTER.
+    # Empty room is on the RIGHT, so it is BEFORE.
+    text = text.replace('<span>BEFORE</span><span>AFTER</span>', '<span>AFTER</span><span>BEFORE</span>')
+    text = text.replace('<span>STAGED</span><span>EMPTY</span>', '<span>AFTER</span><span>BEFORE</span>')
     path.write_text(text, encoding='utf-8')
 
 # Make every regular image inside <main> openable. Slider images still use their full-screen button.
@@ -56,7 +58,7 @@ css_path.write_text(css, encoding='utf-8')
 sw_path = root / 'sw.js'
 if sw_path.exists():
     sw = sw_path.read_text(encoding='utf-8')
-    sw = re.sub(r'const CACHE\s*=\s*["\'][^"\']+["\'];', 'const CACHE = "realtypixelworks-staged-left-v13";', sw)
+    sw = re.sub(r'const CACHE\s*=\s*["\'][^"\']+["\'];', 'const CACHE = "realtypixelworks-vs-labels-v14";', sw)
     sw_path.write_text(sw, encoding='utf-8')
 
-print('Applied latest RealtyPixelWorks Virtual Staging + image viewer fixes.')
+print('Applied RealtyPixelWorks Virtual Staging direction + Before/After label fixes.')
